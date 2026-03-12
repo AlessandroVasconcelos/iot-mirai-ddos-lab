@@ -1,0 +1,13 @@
+FROM alpine:latest
+
+# Adiciona repositórios e instala ferramentas essenciais
+RUN apk update && \
+    apk add --no-cache \
+    bash \
+    expect \
+    apache2-utils \
+    hping3 --repository=http://dl-cdn.alpinelinux.org/alpine/edge/testing
+
+COPY mirai_lab.exp /root/mirai_lab.exp
+COPY wordlist.txt /root/wordlist.txt
+RUN chmod +x /root/mirai_lab.exp

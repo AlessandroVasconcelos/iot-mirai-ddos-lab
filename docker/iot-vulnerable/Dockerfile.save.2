@@ -1,0 +1,1 @@
+FROM alpine:latest RUN apk update && \ apk add --no-cache \ busybox-extras \ shadow \ bash \ curl \ apache2-utils \ coreutils RUN adduser -D iot && echo "iot:1234" | chpasswd EXPOSE 23 CMD ["/usr/sbin/telnetd", "-F", "-l", "/bin/login"]

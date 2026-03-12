@@ -1,0 +1,15 @@
+FROM alpine:latest
+
+RUN apk update && \
+    apk add --no-cache busybox-extras apache2-utils shadow
+
+# Define senha fraca corretamente
+RUN echo "root:1234" | chpasswd
+
+# Garante shell válido
+RUN sed -i 's|root:x:0:0:root:/root:/bin/ash|root:x:0:0:root:/root:/bin/sh|' /etc/passwd
+
+EXPOSE 23
+
+CMD ["/usr/sbin/telnetd", "-F", "-l", "/bin/sh"]
+

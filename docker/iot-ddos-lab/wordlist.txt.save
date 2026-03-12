@@ -1,0 +1,14 @@
+root:root
+admin:pass
+cd root
+./mirai_lab.exp
+
+support:support
+admin:admin
+iot:1234
+admin:1234
+root:123456
+user:user
+admin:password
+default:default
+guest:guest

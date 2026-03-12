@@ -1,0 +1,11 @@
+admin:1234
+admin:pass
+admin:admin
+support:support
+root:root
+iot:1234
+root:123456
+user:user
+admin:password
+default:default
+guest:guest

