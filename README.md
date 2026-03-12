@@ -60,7 +60,7 @@ Contêiner executando Apache HTTP Server na porta 80, responsável por prover um
 
 <div align="justify">
 
-Contêineres configurados para representar diferentes posturas de segurança, variando conforme o serviço remoto exposto (Telnet ou SSH), o tipo de autenticação (senhas fracas, senhas fortes ou chaves) e a presença ou ausência de serviços desnecessários. O perfil vulnerável base, com a porta  Telnet (23/TCP) exposta foi definido em [`docker/iot-vulnerable/Dockerfile`](docker/iot-vulnerable/Dockerfile).
+Contêineres configurados para representar diferentes posturas de segurança, variando conforme o serviço remoto exposto (Telnet ou SSH), o tipo de autenticação (senhas fracas, senhas fortes ou chaves) e a presença ou ausência de serviços desnecessários. O perfil vulnerável base, com a porta  Telnet (23/TCP) exposta foi definido em [`/iot-vulnerable/Dockerfile`](docker/iot-vulnerable/Dockerfile).
 
 </div>
 
@@ -105,7 +105,7 @@ Após a execução do cenário ofensivo, foram aplicadas contramedidas orientada
 
 <div align="justify">
 
-Neste perfil, definido em [`docker/iot-hardened/Dockerfile`](docker/iot-hardened/Dockerfile), foram removidos serviços de acesso remoto, como o `telnetd`, e fechadas as portas correspondentes, simulando um dispositivo configurado estritamente com os serviços essenciais para sua operação. O objetivo foi testar a hipótese de redução máxima da superfície de ataque, avaliando se a indisponibilidade de portas inviabiliza o encadeamento do ataque ainda na fase inicial de reconhecimento, antes mesmo da etapa de força bruta.
+Neste perfil, definido em [`/iot-hardened/Dockerfile`](docker/iot-hardened/Dockerfile), foram removidos serviços de acesso remoto, como o `telnetd`, e fechadas as portas correspondentes, simulando um dispositivo configurado estritamente com os serviços essenciais para sua operação. O objetivo foi testar a hipótese de redução máxima da superfície de ataque, avaliando se a indisponibilidade de portas inviabiliza o encadeamento do ataque ainda na fase inicial de reconhecimento, antes mesmo da etapa de força bruta.
 
 </div>
 
@@ -113,7 +113,7 @@ Neste perfil, definido em [`docker/iot-hardened/Dockerfile`](docker/iot-hardened
 
 <div align="justify">
 
-Neste perfil, mantido em [`docker/iot-vulnerable/Dockerfile`](docker/iot-vulnerable/Dockerfile), o serviço Telnet permaneceu ativo e exposto na porta 23/TCP, porém as credenciais padrão foram substituídas por uma senha complexa. O propósito foi isolar a variável de autenticação, testando o comportamento do dispositivo frente à execução do script de brute force.
+Neste perfil, mantido em [`/iot-vulnerable/Dockerfile`](docker/iot-vulnerable/Dockerfile), o serviço Telnet permaneceu ativo e exposto na porta 23/TCP, porém as credenciais padrão foram substituídas por uma senha complexa. O propósito foi isolar a variável de autenticação, testando o comportamento do dispositivo frente à execução do script de brute force.
 
 </div>
 
@@ -121,7 +121,7 @@ Neste perfil, mantido em [`docker/iot-vulnerable/Dockerfile`](docker/iot-vulnera
 
 <div align="justify">
 
-Neste cenário, descrito em [`docker/iot-hardened-ssh-pass/Dockerfile`](docker/iot-hardened-ssh-pass/Dockerfile), o acesso remoto foi migrado para SSH, mantendo autenticação baseada em senha. O objetivo foi configurar um ambiente com canal cifrado para testar a proteção da confidencialidade do tráfego em rede, ao mesmo tempo em que se avalia a persistência da vulnerabilidade do dispositivo contra ataques de força bruta devido ao uso de senhas.
+Neste cenário, descrito em [`/iot-hardened-ssh-pass/Dockerfile`](docker/iot-hardened-ssh-pass/Dockerfile), o acesso remoto foi migrado para SSH, mantendo autenticação baseada em senha. O objetivo foi configurar um ambiente com canal cifrado para testar a proteção da confidencialidade do tráfego em rede, ao mesmo tempo em que se avalia a persistência da vulnerabilidade do dispositivo contra ataques de força bruta devido ao uso de senhas.
 
 </div>
 
@@ -129,7 +129,7 @@ Neste cenário, descrito em [`docker/iot-hardened-ssh-pass/Dockerfile`](docker/i
 
 <div align="justify">
 
-Neste perfil, implementado em [`docker/iot-hardened-ssh/Dockerfile`](docker/iot-hardened-ssh/Dockerfile), a migração para SSH ocorreu com autenticação exclusiva por chaves assimétricas e desativação total do login por senha. O objetivo é eliminar o vetor de adivinhação por brute force e restringir o acesso remoto estritamente aos administradores do dispositivo.
+Neste perfil, implementado em [`/iot-hardened-ssh/Dockerfile`](docker/iot-hardened-ssh/Dockerfile), a migração para SSH ocorreu com autenticação exclusiva por chaves assimétricas e desativação total do login por senha. O objetivo é eliminar o vetor de adivinhação por brute force e restringir o acesso remoto estritamente aos administradores do dispositivo.
 
 Para essa defesa, adota-se um par de chaves criptográficas RSA 2048 bits:
 
