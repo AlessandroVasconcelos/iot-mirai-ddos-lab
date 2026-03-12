@@ -26,9 +26,11 @@ A pesquisa segue uma abordagem experimental e comparativa, realizada em laborat�
 
 ## Topologia do Cenário de Ataque
 
-![Topologia do ataque](assets/topologia_ataque.png)
-
 <p align="center"><em>Figura 1 — Topologia do ataque.</em></p>
+
+<p align="center">
+  <img src="assets/topologia_ataque.png" alt="Topologia do ataque" width="700">
+</p>
 
 ## Imagens Docker e Papéis dos Nós
 
@@ -63,20 +65,23 @@ Contêineres configurados para representar diferentes posturas de segurança, va
 </div>
 
 ## Evidências do Cenário Ofensivo
-
-![Execução do script inspirado na Mirai](assets/bruteforce.png)
-
 <p align="center"><em>Figura 2 — Execução do script inspirado na Mirai: varredura Telnet e tentativas de credenciais.</em></p>
 
-
-![Captura de pacotes pelo Wireshark evidenciando a varredura na porta 23/TCP.](assets/mirai_scanning.png)
+<p align="center">
+  <img src="assets/bruteforce.png" alt="Execução do script inspirado na Mirai" width="650">
+</p>
 
 <p align="center"><em>Figura 3 — Captura de pacotes pelo Wireshark evidenciando a varredura na porta 23/TCP pelo atacante.</em></p>
 
-
-![Serviço web da vítima antes e depois do ataque](assets/site.png)
+<p align="center">
+  <img src="assets/mirai_scanning.png" alt="Captura de pacotes pelo Wireshark evidenciando a varredura na porta 23/TCP." width="650">
+</p>
 
 <p align="center"><em>Figura 4 — Serviço web estático do servidor vítima: carregamento normal vs. indisponibilidade após DDoS.</em></p>
+
+<p align="center">
+  <img src="assets/site.png" alt="Serviço web da vítima antes e depois do ataque" width="650">
+</p>
 
 ## Estratégia de Mitigação
 
@@ -88,9 +93,11 @@ Após a execução do cenário ofensivo, foram aplicadas contramedidas orientada
 
 ## Topologia do Cenário de Mitigação
 
-![Topologia da mitigação](assets/topologia_mitigacao.png)
-
 <p align="center"><em>Figura 5 — Topologia da mitigação.</em></p>
+
+<p align="center">
+  <img src="assets/topologia_mitigacao.png" alt="Topologia da mitigação" width="700">
+</p>
 
 ### Perfis de Mitigação
 
@@ -151,4 +158,3 @@ Assim, a postura mais robusta é obtida com autenticação por chaves e desativa
 [![GNS3 VM](https://img.shields.io/badge/GNS3_VM-2C5AA0?style=for-the-badge&logo=opensuse&logoColor=white)](https://gns3.com/software/download-vm)
 [![Docker](https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white)](https://www.docker.com/)
 [![Wireshark](https://img.shields.io/badge/Wireshark-1679A7?style=for-the-badge&logo=wireshark&logoColor=white)](https://www.wireshark.org/)
-
