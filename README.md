@@ -2,7 +2,7 @@
 
 <div align="justify">
 
-Este projeto foi desenvolvido como parte do meu Trabalho de Conclusão de Curso (TCC) e apresenta um laboratório de redes IoT em um ambiente de simulação controlado, criado para reproduzir, de forma didática, segura e reprodutível, um cenário de ataque DDoS inspirado na botnet **Mirai**. O laboratório também permite analisar a eficácia de medidas defensivas baseadas em hardening e redução da superfície de ataque em diferentes perfis de dispositivos IoT.
+Este projeto foi desenvolvido como parte do meu Trabalho de Conclusão de Curso (TCC) e apresenta um laboratório de redes IoT em um ambiente de simulação controlado, criado para reproduzir, de forma didática, segura e reprodutível, um cenário de ataque DDoS inspirado na botnet **Mirai**. O laboratório também permite analisar a eficácia de medidas defensivas baseadas em hardening e redução da superfície de ataque em diferentes perfis de dispositivos IoT. 
 
 </div>
 
